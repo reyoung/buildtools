@@ -46,3 +46,5 @@ RUN LD_LIBRARY_PATH=/opt/_internal/cpython-2.7.11-ucs4/lib:${LD_LIBRARY_PATH} /o
 RUN wget -O /opt/swig-2.0.12.tar.gz https://sourceforge.net/projects/swig/files/swig/swig-2.0.12/swig-2.0.12.tar.gz/download && \
     cd /opt && tar xzf swig-2.0.12.tar.gz && cd /opt/swig-2.0.12 && ./configure && make && make install && cd /opt && rm swig-2.0.12.tar.gz
 
+RUN mkdir -p /src && cd /src && git clone https://github.com/NVIDIA/nccl.git nccl && cd nccl &&\
+    make -j `nproc` install <NCCL_MAKE_OPTS>  && cd .. && rm -rf nccl
